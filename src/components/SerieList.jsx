@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom' 
 
 export default function SerieList() {
+// lista de séries mantida no estado
   const [series, setSeries] = useState([])
-  const navigate = useNavigate()
 
+// carrega do localStorage na montagem do componente
   useEffect(() => {
     const guardadas = JSON.parse(localStorage.getItem('series') || '[]')
     setSeries(guardadas)
   }, [])
 
+// exclui uma série e persiste a lista nova
   const excluir = id => {
     const novas = series.filter(s => s.id !== id)
     localStorage.setItem('series', JSON.stringify(novas))
     setSeries(novas)
   }
 
-  const editar = serie => navigate('/cadastro', { state: serie })
-
+// se não há séries
   if (series.length === 0)
     return <p>Nenhuma série cadastrada ainda.</p>
 
@@ -27,13 +28,17 @@ export default function SerieList() {
         {series.map(s => (
           <li key={s.id}>
             Título: {s.titulo} | Temporadas: {s.temporadas} | Lançamento: {s.lancamento} | Diretor: {s.diretor} | Produtora: {s.produtora} | Categoria: {s.categoria} | Assistido em: {s.assistidoEm}
-            <button onClick={() => editar(s)}>Editar</button>
+            <Link to="/cadastro" state={s}>
+              <button>Editar</button>
+            </Link>
             <button onClick={() => excluir(s.id)}>Excluir</button>
           </li>
         ))}
       </ul>
 
-      <button onClick={() => navigate('/cadastro')}>Cadastrar nova série</button>
+      <Link to="/cadastro">
+        <button>Cadastrar nova série</button>
+      </Link>
     </>
   )
 }

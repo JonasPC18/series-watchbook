@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 
+// objeto “molde” com todas as chaves e valores vazios
 const blank = {
   titulo: '',
   temporadas: '',
@@ -10,17 +11,24 @@ const blank = {
   assistidoEm: ''
 }
 
+// prop "initial": objeto opcional para preencher o formulário (modo edição) 
+// prop onSubmit: callback opcional caso o pai queira tratar o envio
 export default function SerieForm({ initial, onSubmit }) {
+// estado que armazena os valores do formulário
   const [form, setForm] = useState(blank)
+// estado que guarda mensagens de erro de validação
   const [errors, setErrors] = useState({})
 
+// quando a prop "initial" mudar, sobrescreve o estado `form`
   useEffect(() => {
     if (initial) setForm(initial)
   }, [initial])
 
+// atualiza um campo do formulário conforme o usuário digita
   const handleChange = e =>
     setForm({ ...form, [e.target.name]: e.target.value })
 
+// valida se todos os campos foram preenchidos; devolve true caso esteja tudo ok
   const validate = () => {
     const err = {}
     Object.keys(blank).forEach(k => {
@@ -34,14 +42,19 @@ export default function SerieForm({ initial, onSubmit }) {
     e.preventDefault()
     if (!validate()) return
 
-    const guardadas = JSON.parse(localStorage.getItem('series') || '[]')  
+// lê as séries já salvas no localStorage (ou inicia um array vazio)
+    const guardadas = JSON.parse(localStorage.getItem('series') || '[]')
+// adiciona a nova série com um id único baseado no timestamp    
     guardadas.push({ ...form, id: Date.now() })
+// persiste o array atualizado de volta no localStorage
     localStorage.setItem('series', JSON.stringify(guardadas))
-
+// limpa o formulário
     setForm(blank)
+// feedback para o usuário
     alert('Série salva!')
   }
 
+//helper para renderizar um campo de entrada (label + input + mensagem de erro)
   const field = (name, label, type = 'text') => (
     <div style={{ marginBottom: 8 }}>
       <label>
@@ -61,6 +74,7 @@ export default function SerieForm({ initial, onSubmit }) {
     </div>
   )
 
+// jsx que monta o formulário na interface
   return (
     <form onSubmit={handleSubmit}>
       {field('titulo', 'Título')}
