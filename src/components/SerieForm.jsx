@@ -33,8 +33,13 @@ export default function SerieForm({ initial, onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault()
     if (!validate()) return
-    onSubmit(form, initial?.id)
+
+    const guardadas = JSON.parse(localStorage.getItem('series') || '[]')  
+    guardadas.push({ ...form, id: Date.now() })
+    localStorage.setItem('series', JSON.stringify(guardadas))
+
     setForm(blank)
+    alert('Série salva!')
   }
 
   const field = (name, label, type = 'text') => (
