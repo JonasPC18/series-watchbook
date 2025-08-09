@@ -1,12 +1,84 @@
-# React + Vite
+# CRUD de Séries — React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é um pequeno CRUD de séries feito em **React**. Ele permite **cadastrar**, **listar** e **excluir** séries armazenando os dados no `localStorage` do navegador. A navegação é feita com `react-router-dom` usando **Hash Router** (para hospedagem estática no github).
 
-Currently, two official plugins are available:
+## Como executar o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Pré-requisitos
+- **Node.js** 
+- **npm** 
 
-## Expanding the ESLint configuration
+### Passos
+```bash
+# Instalar dependências
+npm install
+# Subir o servidor de desenvolvimento (Vite)
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+
+---
+
+##  Estrutura
+
+
+```
+src/
+├─ components/
+│  ├─ NavBar/NavBar.jsx
+│  ├─ SerieForm/SerieForm.jsx
+│  └─ SerieList/SerieList.jsx
+├─ pages/
+│  ├─ Home.jsx
+│  ├─ Cadastro.jsx
+│  ├─ Lista.jsx
+│  └─ Sobre.jsx
+├─ App.jsx
+├─ main.jsx
+├─ index.css
+└─ App.css
+```
+
+---
+
+##  O que cada parte faz
+
+### `NavBar`
+Barra de navegação principal com links para **Página Inicial**, **Cadastro**, **Lista** e **Sobre**.
+
+### `SerieForm`
+Formulário controlado para criar uma série.  
+- Validação simples de obrigatoriedade em todos os campos.  
+- Ao enviar, lê a lista salva em `localStorage` (`series`), **adiciona** um novo item com `id` baseado em timestamp e salva novamente.  
+- Campos: título, temporadas, lançamento, diretor, produtora, categoria, data assistida.
+
+### `SerieList`
+Lista as séries salvas no `localStorage`.  
+- Carregamento inicial a partir de `localStorage`.  
+- Botão **Excluir** remove a série e persiste a lista atualizada.  
+- Botão **Editar** navega para a rota de cadastro enviando o objeto da série no `state` da navegação.
+
+### Páginas
+- **Home**: mensagem de boas-vindas.  
+- **Cadastro**: renderiza o `SerieForm`.  
+- **Lista**: renderiza a `SerieList`.  
+- **Sobre**: descrição rápida do projeto.  
+
+
+---
+
+##  Decisões de desenvolvimento
+
+- **HashRouter**: a biblioteca foi escolhido para facilitar o deploy na hospedagem estática do github pages.  
+- **Persistência com `localStorage`**: solução para não precisar de backend.
+- **IDs com `Date.now()`**: suficiente para o escopo; baixa chance de colisão em usos normais.  
+- **Validação mínima**: apenas “campo obrigatório” por simplicidade.  
+- **Edição planejada**: o formulário já aceita uma prop `initial` para preencher os campos em modo edição; a página de `Cadastro` deve repassar o `state` da navegação ao formulário e o `handleSubmit` do formulário deve **atualizar** um item existente quando houver `id` em vez de sempre criar.
+- **Lógica nos componentes**: as páginas foram mantidas o mais simples possível, apenas renderizando os componentes. Toda a lógica foi concentrada nos componentes, favorecendo reuso.
+
+---
+
+## Como limpar os dados
+Como os dados ficam no `localStorage`, é possível limpá-los pelo DevTools do navegador (Application -> Local Storage -> localhost -> `series`):
+
+---

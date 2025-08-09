@@ -1,5 +1,5 @@
 import { HashRouter, Routes, Route} from 'react-router-dom'
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar/NavBar'
 import Home from './pages/Home'
 import Cadastro from './pages/Cadastro'
 import Lista from './pages/Lista'

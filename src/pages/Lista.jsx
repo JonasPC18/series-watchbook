@@ -1,4 +1,4 @@
-import SerieList from '../components/SerieList'
+import SerieList from '../components/SerieList/SerieList'
 
 export default function Lista() {
   return (
