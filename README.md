@@ -82,3 +82,17 @@ Lista as séries salvas no `localStorage`.
 Como os dados ficam no `localStorage`, é possível limpá-los pelo DevTools do navegador (Application -> Local Storage -> localhost -> `series`):
 
 ---
+
+## Capturas de tela
+
+### Página Inicial
+![Página Inicial](docs/img/5a51115a-2c95-467b-83cc-176b1f79ea40.png)
+
+### Lista de Séries
+![Lista de Séries](docs/img/3dd5b091-bfaf-4ca8-891a-1b0a3d4f4951.png)
+
+### Cadastro de Séries
+![Cadastro de Séries](docs/img/b4ebfd4e-f5bd-47ac-a377-7661134bf2f9.png)
+
+### Sobre
+![Sobre](docs/img/419cfb50-b0ef-4bb2-a134-4b7005f16fd6.png)
