@@ -1,0 +1,16 @@
+.navbar-custom {
+  background-color: #4D3C3C !important;
+}
+
+.navbar-custom .navbar-brand {
+  color: #E5A9A9 !important;
+  text-shadow: 1px 5px 5px rgba(0,0,0,0.6);
+}
+
+.navbar-custom .nav-link {
+  color: white !important;
+}
+
+.navbar-custom .nav-link.active {
+  color: #E5A9A9 !important;
+}

@@ -5,3 +5,9 @@ display: flex;
   justify-content: center;
   min-height: 80vh;
 }
+
+body {
+  background-color: #231414;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+}
