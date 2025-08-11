@@ -1,9 +1,9 @@
 .navbar-custom {
-  background-color: #4D3C3C !important;
+  background-color: #4b2e21 !important;
 }
 
 .navbar-custom .navbar-brand {
-  color: #E5A9A9 !important;
+  color: #fd7f4f !important;
   text-shadow: 1px 5px 5px rgba(0,0,0,0.6);
 }
 
@@ -12,5 +12,5 @@
 }
 
 .navbar-custom .nav-link.active {
-  color: #E5A9A9 !important;
+  color: #fd7f4f !important;
 }

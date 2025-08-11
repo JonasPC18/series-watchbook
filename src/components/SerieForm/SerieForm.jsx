@@ -55,36 +55,74 @@ export default function SerieForm({ initial, onSubmit }) {
   }
 
 //helper para renderizar um campo de entrada (label + input + mensagem de erro)
-  const field = (name, label, type = 'text') => (
-    <div style={{ marginBottom: 8 }}>
-      <label>
-        {label}:<br />
-        <input
-          type={type}
-          name={name}
-          value={form[name]}
-          onChange={handleChange}
-        />
-      </label>
-      {errors[name] && (
-        <div style={{ color: 'red', fontSize: 12 }}>
-          {errors[name]}
-        </div>
-      )}
+const field = (name, label, type = "text", extra = {}) => (
+    <div className="mb-3">
+      <label className="form-label text-dark">{label}</label>
+      <input
+        type={type}
+        name={name}
+        value={form[name]}
+        onChange={handleChange}
+        className={`form-control form-control-lg ${
+          errors[name] ? "is-invalid" : ""
+        }`}
+        {...extra}
+      />
+      {errors[name] && <div className="invalid-feedback">{errors[name]}</div>}
     </div>
-  )
+  );
 
-// jsx que monta o formulário na interface
   return (
-    <form onSubmit={handleSubmit}>
-      {field('titulo', 'Título')}
-      {field('temporadas', 'Número de Temporadas', 'number')}
-      {field('lancamento', 'Data de Lançamento', 'date')}
-      {field('diretor', 'Diretor')}
-      {field('produtora', 'Produtora')}
-      {field('categoria', 'Categoria')}
-      {field('assistidoEm', 'Data em que assistiu', 'date')}
-      <button type="submit">Salvar Série</button>
-    </form>
-  )
+    <div className="container py-5">
+      <div
+        className="mx-auto border rounded shadow-lg p-4 p-md-5 text-dark"
+        style={{
+          width: "min(90vw, 760px)",
+          background: "#fff",
+          backdropFilter: "blur(2px)",
+        }}
+      >
+        <h2 className="mb-4 text-center text-dark">Cadastro de Série</h2>
+
+        <form onSubmit={handleSubmit} noValidate>
+          <div className="row g-3">
+            <div className="col-12">{field("titulo", "Título")}</div>
+
+            <div className="col-12 col-md-6">
+              {field("temporadas", "Número de Temporadas", "number", {
+                min: 0,
+                inputMode: "numeric",
+              })}
+            </div>
+
+            <div className="col-12 col-md-6">
+              {field("lancamento", "Data de Lançamento", "date")}
+            </div>
+
+            <div className="col-12 col-md-6">
+              {field("diretor", "Diretor")}
+            </div>
+
+            <div className="col-12 col-md-6">
+              {field("produtora", "Produtora")}
+            </div>
+
+            <div className="col-12 col-md-6">
+              {field("categoria", "Categoria")}
+            </div>
+
+            <div className="col-12 col-md-6">
+              {field("assistidoEm", "Data em que assistiu", "date")}
+            </div>
+          </div>
+
+          <div className="text-center mt-4">
+            <button type="submit" className="btn btn-dark btn-lg px-4">
+              Salvar Série
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
