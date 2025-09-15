@@ -1,9 +1,9 @@
+import { useLocation } from 'react-router-dom'
 import SerieForm from '../components/SerieForm/SerieForm'
 
 export default function Cadastro() {
-  return (
-    <>
-      <SerieForm />
-    </>
-  )
+  const { state: initial } = useLocation()
+
+  return <SerieForm initial={initial} />
 }
+
