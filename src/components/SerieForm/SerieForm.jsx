@@ -151,6 +151,3 @@ export default function SerieForm({ initial, onSubmit }) {
   )
 }
 
-    </div>
-  );
-}
